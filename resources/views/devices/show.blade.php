@@ -22,7 +22,7 @@
                                     <td><a href="{{route('ports.edit', $port->id)}}">{{$port->name}}</a> </td>
                                     <td>{{$port->vlan}}</td>
                                     <td>Up</td>
-                                    <td>1000T</td>
+                                    <td>1000-T</td>
                                 </tr>
 
                             @endforeach
