@@ -10,18 +10,23 @@
                     <div class="card-body">
                         <h1>Devices</h1>
 
-                            <table>
-                                <tr>
-                                    <th>Device name</th>
-                                    <th>Device IP</th>
-                                </tr>
-                                @foreach ($devices as $device)
+                        <table class="table table-bordered">
+                            <tr>
+                                <th width="80px">@sortablelink('id')</th>
+                                <th>@sortablelink('name')</th>
+                                <th>@sortablelink('id')</th>
+                            </tr>
+                            @if($devices->count())
+                                @foreach($devices as $key => $product)
                                     <tr>
-                                        <td><a href="/devices/{{$device->id}}">{{$device->name}}</a> </td>
-                                        <td>{{$device->ip}}</td>
+                                        <td>{{ $product->id }}</td>
+                                        <td>{{ $product->name }}</td>
+                                        <td>{{ $product->ip }}</td>
                                     </tr>
                                 @endforeach
-                            </table>
+                            @endif
+                        </table>
+                        {!! $devices->appends(\Request::except('page'))->render() !!}
 
 
                     </div>

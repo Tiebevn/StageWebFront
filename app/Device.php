@@ -3,15 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 class Device extends Model
 {
+    use Sortable;
+
     protected $fillable = [
         'name',
         'ip',
     ];
 
-    protected $sortable = [
+    public $sortable = [
       'id',
       'name',
       'ip',
