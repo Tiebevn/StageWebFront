@@ -8,7 +8,7 @@
                     <div class="card-header">Dashboard</div>
                     <div class="card-body">
                         <h2>Set port template</h2>
-                        <form method="post" action="/ports/{{$port->id}}">
+                        <form method="post" action="/ports/{{$port->id}}" id="editPort" onsubmit="return confirm('Do you really want to submit the form?');">
                             {{ method_field('PATCH') }}
                             <div class="form-group">
                                 @csrf
@@ -23,20 +23,20 @@
                         </form>
                         <h3>History</h3>
 
-                           <table>
-                               <tr>
-                                   <th>Time</th>
-                                   <th>User</th>
-                                   <th>Template</th>
-                               </tr>
-                               @foreach($changes as $change)
-                                   <tr>
-                                       <td>{{$change->created_at}}</td>
-                                       <td>{{$change->user->name}}</td>
-                                       <td>{{$change->template->name}}</td>
-                                   </tr>
-                               @endforeach
-                           </table>
+                        <table>
+                            <tr>
+                                <th>Time</th>
+                                <th>User</th>
+                                <th>Template</th>
+                            </tr>
+                            @foreach($changes as $change)
+                                <tr>
+                                    <td>{{$change->created_at}}</td>
+                                    <td>{{$change->user->name}}</td>
+                                    <td>{{$change->template->name}}</td>
+                                </tr>
+                            @endforeach
+                        </table>
 
                     </div>
                 </div>
