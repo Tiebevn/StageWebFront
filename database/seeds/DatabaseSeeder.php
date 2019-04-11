@@ -11,20 +11,28 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $device = new \App\Device();
-        $device->name = "Test";
-        $device->ip = "12.34.56.78";
-        $device->created_at = \Carbon\Carbon::now();
-        $device->updated_at = \Carbon\Carbon::now();
-        $device->save();
-
-        for ($i = 1; $i<=24; $i++) {
-            $port = new \App\Port([
-                'name' => 'G0/'.$i,
-                'vlan' => 1,
-                'device_id' => 1
-            ]);
-            $port->save();
+        $devicelist = [];
+        for ($i = 1; $i <=40; $i++) {
+            $device = new \App\Device();
+            $device->name = "HSR-".$i;
+            $device->ip = "10.34.5.".$i;
+            $device->created_at = \Carbon\Carbon::now();
+            $device->updated_at = \Carbon\Carbon::now();
+            $device->save();
+            $devicelist[$i] = $device;
         }
+
+        for ($i = 1; $i <= sizeof($devicelist); $i++) {
+            for ($j = 1; $j<=48; $j++) {
+                $port = new \App\Port([
+                    'name' => 'G0/'.$j,
+                    'vlan' => 1,
+                    'device_id' => $i
+                ]);
+                $port->save();
+            }
+        }
+
+
     }
 }

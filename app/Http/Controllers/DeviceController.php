@@ -12,9 +12,15 @@ class DeviceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('devices.index', ['devices' => Device::all()]);
+        if($request->has('name')) {
+
+            return view('devices.index', ['devices' => Device::where('name', 'LIKE', '%' . $request->input('name') . '%')->sortable()->paginate(20)]);
+            //return view('devices.index', ['devices' => Device::sortable()->paginate(20)]);
+
+        }
+        return view('devices.index', ['devices' => Device::sortable()->paginate(20)]);
     }
 
     /**
