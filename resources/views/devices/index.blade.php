@@ -17,7 +17,7 @@
                             <tr>
                                 <th width="80px">@sortablelink('id')</th>
                                 <th>@sortablelink('name')</th>
-                                <th>@sortablelink('id')</th>
+                                <th>@sortablelink('ip')</th>
                             </tr>
                             @if($devices->count())
                                 @foreach($devices as $key => $device)
