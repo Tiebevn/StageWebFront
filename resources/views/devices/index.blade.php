@@ -17,17 +17,16 @@
                                 <th>@sortablelink('id')</th>
                             </tr>
                             @if($devices->count())
-                                @foreach($devices as $key => $product)
+                                @foreach($devices as $key => $device)
                                     <tr>
-                                        <td>{{ $product->id }}</td>
-                                        <td>{{ $product->name }}</td>
-                                        <td>{{ $product->ip }}</td>
+                                        <td>{{ $device->id }}</td>
+                                        <td>{{ $device->name }}</td>
+                                        <td>{{ $device->ip }}</td>
                                     </tr>
                                 @endforeach
                             @endif
                         </table>
                         {!! $devices->appends(\Request::except('page'))->render() !!}
-
 
                     </div>
                 </div>
