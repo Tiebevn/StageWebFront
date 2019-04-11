@@ -9,7 +9,10 @@
 
                     <div class="card-body">
                         <h1>Devices</h1>
-
+                        <form action="{{route('devices.index')}}">
+                            <input name="name" id="name" type="text">
+                            <input type="submit">
+                        </form>
                         <table class="table table-bordered">
                             <tr>
                                 <th width="80px">@sortablelink('id')</th>
