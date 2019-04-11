@@ -23,7 +23,7 @@
                                 @foreach($devices as $key => $device)
                                     <tr>
                                         <td>{{ $device->id }}</td>
-                                        <td>{{ $device->name }}</td>
+                                        <td><a href="{{route('devices.show', $device->id)}}">{{ $device->name }}</a> </td>
                                         <td>{{ $device->ip }}</td>
                                     </tr>
                                 @endforeach
