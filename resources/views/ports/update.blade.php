@@ -8,7 +8,8 @@
                     <div class="card-header">Dashboard</div>
                     <div class="card-body">
                         <h2>Set port template</h2>
-                        <form method="post" action="/ports/{{$port->id}}" id="editPort" onsubmit="return confirm('Do you really want to submit the form?');">
+                        <form method="post" action="/ports/{{$port->id}}" id="editPort"
+                              onsubmit="return confirm('Do you really want to submit the form?');">
                             {{ method_field('PATCH') }}
                             <div class="form-group">
                                 @csrf
