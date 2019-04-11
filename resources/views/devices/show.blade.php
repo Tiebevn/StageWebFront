@@ -16,15 +16,15 @@
                                 <th>VLAN</th>
                                 <th>Status</th>
                                 <th>Speed</th>
-                                <th>Duplex</th>
+                                <th>Description</th>
                             </tr>
                             @foreach($ports as $port)
                                 <tr>
                                     <td><a href="{{route('ports.edit', $port->id)}}">{{$port->name}}</a> </td>
                                     <td>{{$port->vlan}}</td>
                                     <td>Up</td>
-                                    <td>1000-T</td>
-                                    <td>Full Duplex</td>
+                                    <td>1000T</td>
+                                    <td>{{$port->description}}</td>
                                 </tr>
 
                             @endforeach

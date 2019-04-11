@@ -81,14 +81,17 @@ class PortController extends Controller
     {
         $port = Port::find($id);
         $template = Template::find($request->get('template'));
+        if($port->vlan != $template->vlan) {
+            $change = new Change([
+                'port_id' => $port->id,
+                'template_id' => $template->id,
+                'user_id' => Auth::id()
+            ]);
+            $change->save();
+        }
         $port->vlan = $template->vlan;
+        $port->description = $request->get('description');
         $port->save();
-        $change = new Change([
-            'port_id' => $port->id,
-            'template_id' => $template->id,
-            'user_id' => Auth::id()
-        ]);
-        $change->save();
         return redirect('/devices/' . $port->device_id);
     }
 
