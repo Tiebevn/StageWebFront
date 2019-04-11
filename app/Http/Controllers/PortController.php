@@ -53,6 +53,29 @@ class PortController extends Controller
         //
     }
 
+
+    /**
+     * Edit a bulk of resources
+     *
+     * @param Request $request
+     * @return View
+     */
+    public function bulkEdit(Request $request) {
+        $portIDs = $request->selected;
+        $ports = collect([]);
+        for ($i = 0; $i < sizeof($portIDs); $i++) {
+            $ports->push(Port::find($portIDs[$i]));
+        }
+        return view('ports.bulkUpdate', ['ports' => $ports]);
+    }
+
+    /**
+     *
+     */
+    public function bulkUpdate() {
+
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
