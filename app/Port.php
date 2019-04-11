@@ -9,7 +9,8 @@ class Port extends Model
     protected $fillable = [
         'name',
         'device_id',
-        'vlan'
+        'vlan',
+        'description'
     ];
 
     public function device()

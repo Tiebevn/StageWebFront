@@ -19,25 +19,33 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">Add</button>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <input class="form-control" name="description" id="description" value="{{$port->description}}">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </div>
                         </form>
-                        <h3>History</h3>
 
-                           <table>
-                               <tr>
-                                   <th>Time</th>
-                                   <th>User</th>
-                                   <th>Template</th>
-                               </tr>
-                               @foreach($changes as $change)
-                                   <tr>
-                                       <td>{{$change->created_at}}</td>
-                                       <td>{{$change->user->name}}</td>
-                                       <td>{{$change->template->name}}</td>
-                                   </tr>
-                               @endforeach
-                           </table>
 
+                          @if(count($changes))
+                            <h3>History</h3>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Time</th>
+                                    <th>User</th>
+                                    <th>Template</th>
+                                </tr>
+                                @foreach($changes as $change)
+                                    <tr>
+                                        <td>{{$change->created_at}}</td>
+                                        <td>{{$change->user->name}}</td>
+                                        <td>{{$change->template->name}}</td>
+                                    </tr>
+                                @endforeach
+                            </table>
+                          @endif
                     </div>
                 </div>
             </div>
