@@ -11,6 +11,12 @@ class Device extends Model
         'ip',
     ];
 
+    protected $sortable = [
+      'id',
+      'name',
+      'ip',
+    ];
+
     public function ports()
     {
         return $this->hasMany('App\Port');
