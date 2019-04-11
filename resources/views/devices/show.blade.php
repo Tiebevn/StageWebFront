@@ -16,6 +16,7 @@
                                 <th>VLAN</th>
                                 <th>Status</th>
                                 <th>Speed</th>
+                                <th>Duplex</th>
                             </tr>
                             @foreach($ports as $port)
                                 <tr>
@@ -23,6 +24,7 @@
                                     <td>{{$port->vlan}}</td>
                                     <td>Up</td>
                                     <td>1000-T</td>
+                                    <td>Full Duplex</td>
                                 </tr>
 
                             @endforeach
