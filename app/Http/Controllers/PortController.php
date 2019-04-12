@@ -7,6 +7,7 @@ use App\Port;
 use App\Template;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class PortController extends Controller
@@ -70,9 +71,21 @@ class PortController extends Controller
     }
 
     /**
+     * Update multiple ports in bulk
      *
+     * @param Request $request
+     * @return View
      */
-    public function bulkUpdate() {
+    public function bulkUpdate(Request $request) {
+        $ports = json_decode($request->get('selected'));
+
+        for ($i = 0; $i < sizeof($ports); $i++) {
+            $port=Port::find($ports[$i]->id);
+            $port->vlan = 5;
+            $port->save();
+        }
+        return redirect('/devices');
+
 
     }
 
@@ -96,9 +109,9 @@ class PortController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param  $id
-     * @return \Illuminate\Http\Response
+     * @return \Redirect
      */
     public function update(Request $request, $id)
     {

@@ -10,9 +10,12 @@
                         <h2>Set port template</h2>
 
 
-                        @foreach($ports as $port)
-                            {{$port->name}}
-                        @endforeach
+
+                        <form action="/ports/bulkUpdate" method="post">
+                            {{csrf_field()}}
+                            <input type="hidden" value="{{$ports}}" name="selected" id="selected">
+                            <input type="submit">
+                        </form>
 
                     </div>
                 </div>
