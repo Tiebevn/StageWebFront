@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Change;
 use App\Port;
 use App\Template;
+use Asm\Ansible\Ansible;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -79,6 +80,10 @@ class PortController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $ansible = new Ansible('/home/tiebevn/School/Stage/Ansible');
+
+        $ansible->playbook()->play('helloworld.yml')->execute();
         $port = Port::find($id);
         $template = Template::find($request->get('template'));
         if($port->vlan != $template->vlan) {
