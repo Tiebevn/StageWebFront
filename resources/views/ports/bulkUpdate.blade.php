@@ -14,7 +14,21 @@
                         <form action="/ports/bulkUpdate" method="post">
                             {{csrf_field()}}
                             <input type="hidden" value="{{$ports}}" name="selected" id="selected">
-                            <input type="submit">
+                            <div class="form-group">
+                                <label for="template">Template</label>
+                                <select name="template" id="template" class="form-control">
+                                    @foreach($templates as $template)
+                                        <option value="{{$template->id}}">{{$template->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <input type="text" id="description" name="description" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="form-control">
+                            </div>
                         </form>
 
                     </div>

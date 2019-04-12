@@ -67,7 +67,7 @@ class PortController extends Controller
         for ($i = 0; $i < sizeof($portIDs); $i++) {
             $ports->push(Port::find($portIDs[$i]));
         }
-        return view('ports.bulkUpdate', ['ports' => $ports]);
+        return view('ports.bulkUpdate', ['ports' => $ports, 'templates' => Template::all()]);
     }
 
     /**
@@ -78,10 +78,19 @@ class PortController extends Controller
      */
     public function bulkUpdate(Request $request) {
         $ports = json_decode($request->get('selected'));
-
+        $template = Template::find($request->get('template'));
         for ($i = 0; $i < sizeof($ports); $i++) {
             $port=Port::find($ports[$i]->id);
-            $port->vlan = 5;
+            if($port->vlan != $template->vlan) {
+                $change = new Change([
+                    'port_id' => $port->id,
+                    'template_id' => $template->id,
+                    'user_id' => Auth::id()
+                ]);
+                $change->save();
+            }
+            $port->vlan = $template->vlan;
+            $port->description = $request->get('description');
             $port->save();
         }
         return redirect('/devices');
