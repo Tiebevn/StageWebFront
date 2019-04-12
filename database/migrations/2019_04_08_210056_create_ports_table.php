@@ -18,6 +18,7 @@ class CreatePortsTable extends Migration
             $table->string('name');
             $table->integer('device_id');
             $table->integer('vlan');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

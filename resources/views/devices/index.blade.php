@@ -9,20 +9,27 @@
 
                     <div class="card-body">
                         <h1>Devices</h1>
-
-                            <table>
-                                <tr>
-                                    <th>Device name</th>
-                                    <th>Device IP</th>
-                                </tr>
-                                @foreach ($devices as $device)
+                        <form action="{{route('devices.index')}}">
+                            <input name="name" id="name" type="text">
+                            <input type="submit">
+                        </form>
+                        <table class="table table-bordered">
+                            <tr>
+                                <th width="80px">@sortablelink('id')</th>
+                                <th>@sortablelink('name')</th>
+                                <th>@sortablelink('ip')</th>
+                            </tr>
+                            @if($devices->count())
+                                @foreach($devices as $key => $device)
                                     <tr>
-                                        <td><a href="/devices/{{$device->id}}">{{$device->name}}</a> </td>
-                                        <td>{{$device->ip}}</td>
+                                        <td>{{ $device->id }}</td>
+                                        <td><a href="{{route('devices.show', $device->id)}}">{{ $device->name }}</a> </td>
+                                        <td>{{ $device->ip }}</td>
                                     </tr>
                                 @endforeach
-                            </table>
-
+                            @endif
+                        </table>
+                        {!! $devices->appends(\Request::except('page'))->render() !!}
 
                     </div>
                 </div>

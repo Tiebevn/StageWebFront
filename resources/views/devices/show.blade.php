@@ -10,19 +10,21 @@
                     <div class="card-body">
                         <h2>Details for {{$device->name}}</h2>
 
-                        <table>
+                        <table class="table table-bordered">
                             <tr>
                                 <th>Port Name</th>
                                 <th>VLAN</th>
                                 <th>Status</th>
                                 <th>Speed</th>
+                                <th>Description</th>
                             </tr>
                             @foreach($ports as $port)
                                 <tr>
-                                    <td><a href="/ports/{{$port->id}}/edit">{{$port->name}}</a> </td>
+                                    <td><a href="{{route('ports.edit', $port->id)}}">{{$port->name}}</a> </td>
                                     <td>{{$port->vlan}}</td>
                                     <td>Up</td>
                                     <td>1000T</td>
+                                    <td>{{$port->description}}</td>
                                 </tr>
 
                             @endforeach
