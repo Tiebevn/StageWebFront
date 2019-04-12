@@ -11,7 +11,7 @@
 
 
 
-                        <form action="/ports/bulkUpdate" method="post">
+                        <form action="/ports/bulkUpdate" method="post" onsubmit="return confirm('Do you really want to submit the form?');">
                             {{csrf_field()}}
                             <input type="hidden" value="{{$ports}}" name="selected" id="selected">
                             <div class="form-group">
