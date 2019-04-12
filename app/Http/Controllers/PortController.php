@@ -8,6 +8,7 @@ use App\Template;
 use Asm\Ansible\Ansible;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class PortController extends Controller
@@ -54,6 +55,50 @@ class PortController extends Controller
         //
     }
 
+
+    /**
+     * Edit a bulk of resources
+     *
+     * @param Request $request
+     * @return View
+     */
+    public function bulkEdit(Request $request) {
+        $portIDs = $request->selected;
+        $ports = collect([]);
+        for ($i = 0; $i < sizeof($portIDs); $i++) {
+            $ports->push(Port::find($portIDs[$i]));
+        }
+        return view('ports.bulkUpdate', ['ports' => $ports, 'templates' => Template::all()]);
+    }
+
+    /**
+     * Update multiple ports in bulk
+     *
+     * @param Request $request
+     * @return View
+     */
+    public function bulkUpdate(Request $request) {
+        $ports = json_decode($request->get('selected'));
+        $template = Template::find($request->get('template'));
+        for ($i = 0; $i < sizeof($ports); $i++) {
+            $port=Port::find($ports[$i]->id);
+            if($port->vlan != $template->vlan) {
+                $change = new Change([
+                    'port_id' => $port->id,
+                    'template_id' => $template->id,
+                    'user_id' => Auth::id()
+                ]);
+                $change->save();
+            }
+            $port->vlan = $template->vlan;
+            $port->description = $request->get('description');
+            $port->save();
+        }
+        return redirect('/devices');
+
+
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -74,9 +119,9 @@ class PortController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param  $id
-     * @return \Illuminate\Http\Response
+     * @return \Redirect
      */
     public function update(Request $request, $id)
     {

@@ -10,25 +10,37 @@
                     <div class="card-body">
                         <h2>Details for {{$device->name}}</h2>
 
-                        <table class="table table-bordered">
-                            <tr>
-                                <th>Port Name</th>
-                                <th>VLAN</th>
-                                <th>Status</th>
-                                <th>Speed</th>
-                                <th>Description</th>
-                            </tr>
-                            @foreach($ports as $port)
+                        <form action="/ports/bulkEdit">
+                            <div class="form-group">
+                                <label for="operation">Bulk operations</label>
+                                <select name="operation" id="operation">
+                                    <option value="edit">Edit</option>
+                                    <option value="reset">Reset</option>
+                                </select>
+                                <input type="submit">
+                            </div>
+                            <table class="table table-bordered">
                                 <tr>
-                                    <td><a href="{{route('ports.edit', $port->id)}}">{{$port->name}}</a> </td>
-                                    <td>{{$port->vlan}}</td>
-                                    <td>Up</td>
-                                    <td>1000T</td>
-                                    <td>{{$port->description}}</td>
+                                    <th>Select</th>
+                                    <th>Port Name</th>
+                                    <th>VLAN</th>
+                                    <th>Status</th>
+                                    <th>Speed</th>
+                                    <th>Description</th>
                                 </tr>
+                                @foreach($ports as $port)
+                                    <tr>
+                                        <td><input type="checkbox" name="selected[]" value="{{$port->id}}"></td>
+                                        <td><a href="{{route('ports.edit', $port->id)}}">{{$port->name}}</a></td>
+                                        <td>{{$port->vlan}}</td>
+                                        <td>Up</td>
+                                        <td>1000T</td>
+                                        <td>{{$port->description}}</td>
+                                    </tr>
 
-                            @endforeach
-                        </table>
+                                @endforeach
+                            </table>
+                        </form>
 
                     </div>
                 </div>

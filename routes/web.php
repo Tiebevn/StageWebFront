@@ -10,7 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/ports/bulkEdit', 'PortController@bulkEdit')->middleware('auth');
+Route::post('/ports/bulkUpdate', 'PortController@bulkUpdate')->middleware('auth');
 Route::resource('/devices', 'DeviceController')->middleware('auth');
 Route::resource('/ports', 'PortController')->middleware('auth');
 Route::resource('/changes', 'ChangesController')->middleware('auth');
