@@ -81,7 +81,7 @@ class PortController extends Controller
     public function update(Request $request, $id)
     {
 
-        $ansible = new Ansible('/home/tiebevn/School/Stage/Ansible');
+        $ansible = new Ansible(env('ANSIBLE_PATH'));
 
         $ansible->playbook()->play('helloworld.yml')->execute();
         $port = Port::find($id);
