@@ -63,7 +63,13 @@ class PortController extends Controller
      * @return View
      */
     public function bulkEdit(Request $request) {
-        $portIDs = $request->selected;
+
+
+        if(!is_null($request->selected)) {
+            $portIDs = $request->selected;
+        } else {
+            return redirect('/devices');
+        }
         $ports = collect([]);
         for ($i = 0; $i < sizeof($portIDs); $i++) {
             $ports->push(Port::find($portIDs[$i]));
